@@ -510,39 +510,72 @@
                     <span class="text-brand-green font-mono text-sm tracking-widest uppercase mb-2 block">// Contact</span>
                     <h2 class="text-4xl md:text-5xl font-bold font-display text-white uppercase">We’re here for you</h2>
                 </div>
-             <form class="space-y-6">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-400">Your Name</label>
-                        <input type="text" id="name" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                    </div>
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-400">Email Address</label>
-                        <input type="email" id="email" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green">
-                    </div>
-                </div>
-
+                     <form 
+          action="https://formspree.io/f/xgvgypnr" 
+          method="POST"
+          class="space-y-6"
+        >
+            <div class="grid md:grid-cols-2 gap-6">
                 <div>
-                    <label for="subject" class="block mb-2 text-sm font-medium text-gray-400">Subject</label>
-                    <select id="subject" name="subject"class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green" required>
-                        <option value="">Select a subject</option>
-                        <option value="player">Player Representation</option>
-                        <option value="content">Content Creation Services</option>
-                        <option value="coaching">Coaching Services</option>
-                        <option value="sponsorship">Sponsorship Inquiry</option>
-                        <option value="other">Other</option>
-                    </select>
+                    <label for="name" class="block mb-2 text-sm font-medium text-gray-400">Your Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name"
+                      required
+                      class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white 
+                             focus:ring-2 focus:ring-brand-green focus:border-brand-green">
                 </div>
-
+        
                 <div>
-                    <label for="message" class="block mb-2 text-sm font-medium text-gray-400">Message</label>
-                    <textarea id="message" name="message" rows="5" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green"></textarea>
+                    <label for="email" class="block mb-2 text-sm font-medium text-gray-400">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      name="email"
+                      required
+                      class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white 
+                             focus:ring-2 focus:ring-brand-green focus:border-brand-green">
                 </div>
+            </div>
+        
+            <div>
+                <label for="subject" class="block mb-2 text-sm font-medium text-gray-400">Subject</label>
+                <select 
+                  id="subject" 
+                  name="subject"
+                  class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white 
+                         focus:ring-2 focus:ring-brand-green focus:border-brand-green"
+                >
+                    <option value="">Select a subject</option>
+                    <option value="player">Player Representation</option>
+                    <option value="content">Content Creation Services</option>
+                    <option value="coaching">Coaching Services</option>
+                    <option value="sponsorship">Sponsorship Inquiry</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        
+            <div>
+                <label for="message" class="block mb-2 text-sm font-medium text-gray-400">Message</label>
+                <textarea 
+                  id="message" 
+                  name="message"
+                  rows="5"
+                  required
+                  class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white 
+                         focus:ring-2 focus:ring-brand-green focus:border-brand-green"
+                ></textarea>
+            </div>
+        
+            <button 
+              type="submit" 
+              class="btn-glow text-black font-bold px-8 py-4 rounded-none w-full md:w-auto text-base"
+            >
+                Send Message
+            </button>
+        </form>
 
-                <button type="submit" class="btn-glow text-black font-bold px-8 py-4 rounded-none w-full md:w-auto text-base">
-                    Send Message
-                </button>
-            </form>
         </div>
     </section>
 
@@ -837,4 +870,5 @@
 </body>
 
 </html>
+
 
