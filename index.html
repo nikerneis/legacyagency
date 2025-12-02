@@ -1,894 +1,650 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title translate="no">Legacy Agency</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title translate="no">LEGACY AGENCY | Esports Management</title>
+    <meta name="description" content="Legacy Agency: Elite Esports Management and Player Development.">
+    <link rel="icon" href="https://i.postimg.cc/LX5BqX9s/couronne-(1).png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://i.postimg.cc/LX5BqX9s/couronne-(1).png" type="image/png">
-    <style>
-        * {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-        
-        /* Apple-inspired glassmorphism and smooth animations */
-        body {
-            background: #000;
-            color: #fff;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        .navbar {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.72);
-            padding: 12px 20px; /* Augmentez le padding vertical pour plus d'espace */
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            height: 70px; /* Définissez une hauteur fixe pour la navbar */
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
 
-
-        .glass-nav {
-            background: rgba(0, 0, 0, 0.72);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Fixed z-index for cards on hover so borders are not hidden */
-        .glass-card {
-            background: rgba(23, 23, 23, 0.6);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            background: rgba(23, 23, 23, 0.8);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            box-shadow: 0 20px 60px -12px rgba(16, 185, 129, 0.4), 0 0 0 1px rgba(16, 185, 129, 0.1);
-            z-index: 10;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-        }
-        
-        .btn-secondary {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1.5px solid rgba(16, 185, 129, 0.5);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(16, 185, 129, 0.2);
-            border-color: #10b981;
-            transform: translateY(-2px);
-        }
-        
-        .carousel-item {
-            min-width: 320px;
-            margin: 0 12px;
-        }
-        
-        @media (max-width: 768px) {
-            .carousel-item {
-                min-width: 280px;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            black: '#050505',
+                            dark: '#0a0a0a',
+                            surface: '#121212',
+                            green: '#10b981', 
+                            greenDark: '#059669',
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
             }
         }
-        
-        .hidden-item {
-            display: none;
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #e5e5e5;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        .text-balance {
+            text-wrap: balance;
+        }
+
+        .pro-panel {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 1px rgba(0,0,0,1), 0 10px 30px -10px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .pro-card {
+            background: linear-gradient(145deg, rgba(20,20,20,0.9) 0%, rgba(10,10,10,0.95) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease-out;
+        }
+
+        .pro-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .pro-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16, 185, 129, 0.2);
+            box-shadow: 0 20px 40px -20px rgba(16, 185, 129, 0.15);
+        }
+
+        .pro-card:hover::before {
+            opacity: 1;
+        }
+
+        .nav-fixed {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .btn-glow {
+            position: relative;
+            background: #10b981;
+            color: #000;
+            font-weight: 700;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
         }
         
-        .dropdown-content {
-            display: none;
-            background: rgba(23, 23, 23, 0.95);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        .btn-glow:hover {
+            background: #34d399;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
         }
-        
-        .dropdown-content.show {
-            display: block;
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            transition: all 0.3s ease;
         }
-        
-        .gradient-text {
-            background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+
+        .btn-outline:hover {
+            border-color: #10b981;
+            color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .heading-accent {
+            background: linear-gradient(to right, #fff, #9ca3af);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+
+        #mobile-menu {
+            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
         }
-        
-        input, select, textarea {
-            background: rgba(23, 23, 23, 0.6) !important;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1) !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        #mobile-menu.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
         }
-        
-        input:focus, select:focus, textarea:focus {
-            background: rgba(23, 23, 23, 0.8) !important;
-            border-color: rgba(16, 185, 129, 0.5) !important;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1) !important;
-        }
-        
-        .hero-gradient {
-            background: radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 50%);
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Added styles for interactive world map */
-        .world-map-container {
-            position: relative;
-            width: 100%;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .region-badge {
-            position: absolute;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .region-badge:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        }
-        
-        .region-usa-canada {
-            background: rgba(220, 38, 38, 0.8);
-            top: 25%;
-            left: 15%;
-        }
-        
-        .region-asia {
-            background: rgba(244, 114, 182, 0.7);
-            top: 30%;
-            right: 15%;
-        }
-        
-        .region-oceania {
-            background: rgba(147, 197, 253, 0.7);
-            bottom: 20%;
-            right: 10%;
-        }
-        
-        .region-europe {
-            background: rgba(30, 58, 138, 0.8);
-            top: 20%;
-            left: 48%;
-        }
-        
-        .region-maghreb {
-            background: rgba(120, 53, 15, 0.8);
-            top: 40%;
-            left: 46%;
-        }
-        
-        .region-orient {
-            background: rgba(234, 179, 8, 0.8);
-            top: 35%;
-            left: 52%;
-        }
-        
-        .region-brazil {
-            background: rgba(34, 197, 94, 0.8);
-            bottom: 35%;
-            left: 28%;
-        }
-        
-        .map-svg {
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(0 4px 20px rgba(16, 185, 129, 0.3));
-        }
-        
-        /* Added stats counter styling for esports metrics */
-        .stats-counter {
-            font-size: 3rem;
-            font-weight: 800;
-            line-height: 1;
+
+        .img-gradient {
+            background: linear-gradient(to top, #0a0a0a 10%, transparent 60%);
         }
     </style>
 </head>
-<body class="bg-black text-white">
-    <!-- Hero Section with Vanta.js Background -->
-    <div id="vanta-bg" class="w-full h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-black opacity-40"></div>
-        <div class="hero-gradient absolute inset-0"></div>
-        <div class="z-10 text-center px-4 float-animation">
-            <!-- Apple-inspired typography with gradient text -->
-            <h1 translate="no" class="text-6xl md:text-8xl font-bold mb-6 gradient-text tracking-tight">LEGACY AGENCY</h1>
-            <h3 translate="no" class="text-3xl md:text-5xl font-semibold mb-6 text-white tracking-tight">Take The Crown</h3>
-            <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto text-gray-300 font-light leading-relaxed">Bringing you to the rank of legend through excellence in management and development of players and content creators</p>
-            <div class="flex justify-center gap-4">
-                <a href="#players" class="btn-primary text-white px-8 py-4 rounded-xl font-semibold text-base">Our Players</a>
-                <a href="#services" class="btn-secondary text-emerald-400 px-8 py-4 rounded-xl font-semibold text-base">Our Services</a>
+<body class="selection:bg-brand-green selection:text-black">
+
+    <nav class="fixed top-0 w-full z-50 nav-fixed transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                   <img src="https://i.postimg.cc/LX5BqX9s/couronne-(1).png" alt="Logo" class="w-8 h-8 object-contain drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+                </div>
+                <div class="flex flex-col">
+                    <span translate="no" class="text-xl font-bold font-display tracking-wide text-white leading-none">LEGACY</span>
+                    <span class="text-[0.6rem] font-medium tracking-[0.2em] text-brand-green uppercase">Agency</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-10">
+                <a href="#about" class="text-sm font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-wide">About</a>
+                <a href="#players" class="text-sm font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-wide">Roster</a>
+                <a href="#staff" class="text-sm font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-wide">Staff</a>
+                <a href="#contact" class="btn-glow px-6 py-2 rounded-none skew-x-[-10deg] hover:skew-x-0 transition-transform">
+                    <span class="block skew-x-[10deg] hover:skew-x-0 transition-transform">CONTACT</span>
+                </a>
             </div>
-        </div>
-    </div>
 
-    <!-- Sticky Navbar -->
-    <nav id="navbar" class="glass-nav fixed top-0 w-full z-50 py-3 hidden">
-          <div class="container mx-auto px-6 flex justify-between items-center">
-          <a translate="no" href="#" class="text-2xl font-bold gradient-text">LEGACY</a> 
-
-
-
-
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="text-gray-300 hover:text-emerald-400 transition-colors duration-300">About</a>
-                <a href="#players" class="text-gray-300 hover:text-emerald-400 transition-colors duration-300">Players</a>
-                <a href="#staff" class="text-gray-300 hover:text-emerald-400 transition-colors duration-300">Staff</a>
-                <a href="#services" class="text-gray-300 hover:text-emerald-400 transition-colors duration-300">Services</a>
-                <a href="#contact" class="text-gray-300 hover:text-emerald-400 transition-colors duration-300">Contact</a>
-            </div>
-            <button class="md:hidden text-white">
-                <i data-feather="menu"></i>
+            <button id="menu-btn" class="md:hidden text-white p-2" aria-label="Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
     </nav>
 
-    <!-- About Section -->
-    <section id="about" class="py-28 px-4 bg-black">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-20">
-                <!-- Refined typography and spacing -->
-                <h2 class="text-5xl font-bold mb-3 gradient-text tracking-tight">Who We Are</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 mx-auto mb-6 rounded-full"></div>
-                <p class="text-lg max-w-3xl mx-auto text-gray-400 font-light leading-relaxed">Legacy Agency is a new esports management agency, specialized in the development of players and content creators. A passionate and determined staff team will support you and take you to the highest level.</p>
-            </div>
-            
-            <!-- Added stats section for esports impact -->
-            <div class="grid md:grid-cols-4 gap-8 mb-16">
-                <div class="glass-card p-8 rounded-2xl text-center">
-                    <div class="stats-counter gradient-text mb-2">7</div>
-                    <p class="text-gray-400 font-light">Countries</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center">
-                    <div class="stats-counter gradient-text mb-2">10</div>
-                    <p class="text-gray-400 font-light">Expert Staff</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center">
-                    <div class="stats-counter gradient-text mb-2">3</div>
-                    <p class="text-gray-400 font-light">Regions</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center">
-                    <div class="stats-counter gradient-text mb-2">24/7</div>
-                    <p class="text-gray-400 font-light">Support</p>
+    <div id="mobile-menu" class="fixed inset-0 z-[49] bg-brand-black/95 backdrop-blur-xl flex flex-col justify-center items-center gap-10 md:hidden">
+        <button id="close-menu-btn" class="absolute top-6 right-6 text-gray-400 hover:text-white p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="flex flex-col items-center gap-8">
+            <a href="#about" class="mobile-link text-4xl font-bold font-display text-white hover:text-brand-green transition-colors">ABOUT</a>
+            <a href="#players" class="mobile-link text-4xl font-bold font-display text-white hover:text-brand-green transition-colors">ROSTER</a>
+            <a href="#staff" class="mobile-link text-4xl font-bold font-display text-white hover:text-brand-green transition-colors">STAFF</a>
+            <a href="#contact" class="mobile-link text-4xl font-bold font-display text-brand-green">CONTACT</a>
+        </div>
+    </div>
+
+    <section class="relative h-screen min-h-[700px] w-full flex items-center justify-center overflow-hidden bg-brand-black">
+        <div id="vanta-bg" class="absolute inset-0 z-0 opacity-40 mix-blend-screen"></div>
+        
+        <div class="absolute inset-0 bg-gradient-radial from-transparent via-brand-black/60 to-brand-black z-10"></div>
+        <div class="absolute bottom-0 w-full h-32 bg-gradient-to-t from-brand-black to-transparent z-10"></div>
+
+        <div class="relative z-20 container mx-auto px-4 text-center">
+            <div data-aos="fade-down" class="inline-block mb-6">
+                <div class="flex items-center gap-3 px-4 py-1.5 border border-brand-green/30 rounded-full bg-brand-green/5 backdrop-blur-md">
+                    <div class="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse"></div>
+                    <span class="text-xs font-semibold text-brand-green tracking-[0.2em] uppercase">Forging Legends</span>
                 </div>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="glass-card p-10 rounded-2xl">
-                    <div class="text-emerald-400 mb-6">
-                        <i data-feather="award" class="w-12 h-12 stroke-1"></i>
-                    </div>
-                    <h3 class="text-2xl font-semibold mb-4 tracking-tight">Champion Mentality</h3>
-                    <p class="text-gray-400 leading-relaxed font-light">We develop winners by focusing on mental resilience, tactical mastery, and preparation for reaching the professional stage.</p>
+            <h1 translate="no" class="text-5xl sm:text-8xl md:text-9xl font-extrabold font-display leading-[0.9] tracking-tighter mb-8 text-white" data-aos="zoom-in" data-aos-duration="1200">
+                LEGACY
+                <span class="text-transparent bg-clip-text bg-gradient-to-b from-brand-green to-emerald-900">AGENCY</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-gray-400 max-w-xl mx-auto mb-12 font-light leading-relaxed text-balance" data-aos="fade-up" data-aos-delay="200">
+                Excellence is not waited for; it is built. We elevate players and creators to legendary status.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center" data-aos="fade-up" data-aos-delay="400">
+                <a href="#players" class="w-full sm:w-auto btn-glow px-8 py-4 rounded-sm font-bold text-sm tracking-widest uppercase">
+                    Discover Roster
+                </a>
+                <a href="#contact" class="w-full sm:w-auto btn-outline px-8 py-4 rounded-sm font-bold text-sm tracking-widest uppercase group flex items-center justify-center gap-2">
+                    Join Legacy <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-10 hidden md:block z-20">
+            <div class="flex items-center gap-4 text-xs text-gray-500 font-mono">
+                <span>EST. 2025</span>
+                <div class="w-8 h-[1px] bg-gray-700"></div>
+                <span>FRANCE</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 sm:py-32 bg-brand-black relative">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-24">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl md:text-6xl font-bold font-display mb-6 heading-accent uppercase">We Build<br>Champions</h2>
+                    <div class="w-20 h-1.5 bg-brand-green mb-8"></div>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        Legacy Agency is not a simple management agency. It is a forge where raw talent is transformed into competitive excellence.
+                    </p>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-green"></i>
+                            <span>Mental and Tactical Development</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-green"></i>
+                            <span>International Career Management</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-green"></i>
+                            <span>Exclusive Partner Network</span>
+                        </li>
+                    </ul>
                 </div>
-                <div class="glass-card p-10 rounded-2xl">
-                    <div class="text-emerald-400 mb-6">
-                        <i data-feather="users" class="w-12 h-12 stroke-1"></i>
+
+                <div class="grid grid-cols-2 gap-4" data-aos="fade-left">
+                    <div class="pro-card p-6 sm:p-8 rounded-sm">
+                        <h3 class="text-4xl sm:text-5xl font-bold text-white mb-2 font-display">7+</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Countries</p>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4 tracking-tight">Global Network</h3>
-                    <p class="text-gray-400 leading-relaxed font-light">We specialize our teams by world regions to provide tailored and precise support across Europe, Americas, Asia, and Oceania.</p>
-                </div>
-                <div class="glass-card p-10 rounded-2xl">
-                    <div class="text-emerald-400 mb-6">
-                        <i data-feather="trending-up" class="w-12 h-12 stroke-1"></i>
+                    <div class="pro-card p-6 sm:p-8 rounded-sm bg-brand-green/5 border-brand-green/20">
+                        <h3 class="text-4xl sm:text-5xl font-bold text-brand-green mb-2 font-display">10+</h3>
+                        <p class="text-xs text-brand-green/70 uppercase tracking-widest">Experts Staff</p>
                     </div>
-                    <h3 class="text-2xl font-semibold mb-4 tracking-tight">Proven Results</h3>
-                    <p class="text-gray-400 leading-relaxed font-light">Our players consistently rank in top tournaments and grow their audiences exponentially through our perfected methods.</p>
+                    <div class="pro-card p-6 sm:p-8 rounded-sm">
+                        <h3 class="text-4xl sm:text-5xl font-bold text-white mb-2 font-display">15K</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Earnings ($)</p>
+                    </div>
+                    <div class="pro-card p-6 sm:p-8 rounded-sm">
+                        <h3 class="text-4xl sm:text-5xl font-bold text-white mb-2 font-display">24/7</h3>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Support</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Section divider -->
-    <div class="section-divider"></div>
-
-    <!-- Players Section -->
-    <section id="players" class="py-28 px-4 bg-black">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold mb-3 gradient-text tracking-tight">Our Talents</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 mx-auto mb-6 rounded-full"></div>
-                <p class="text-lg max-w-3xl mx-auto text-gray-400 font-light">Discover our elite roster of competitive players, dominating across multiple games and regions.</p>
-            </div>
-
-            <!-- Reordered dropdown menu to put Fortnite first -->
-            <div class="flex justify-center mb-16">
-                <div class="dropdown relative">
-                    <button id="gameFilterButton" onclick="toggleDropdown(event)" class="glass-card px-6 py-3 rounded-xl font-medium text-sm flex items-center text-gray-300 hover:text-white">
-                        Filter by Game <i data-feather="chevron-down" class="ml-2 w-4 h-4"></i>
-                    </button>
-                    <div id="dropdownContent" class="dropdown-content absolute left-0 mt-2 w-56 rounded-xl overflow-hidden z-50">
-                        <a href="javascript:void(0)" onclick="filterPlayers('all')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">All Games</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('fortnite')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">Fortnite</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('valorant')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">Valorant</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('league')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">League of Legends</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('cs2')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">Counter-Strike 2</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('rocket')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">Rocket League</a>
-                        <a href="javascript:void(0)" onclick="filterPlayers('cod')" class="block px-5 py-3 hover:bg-emerald-500/10 text-gray-300 hover:text-emerald-400 transition-colors text-sm">Call of Duty</a>
-                    </div>
+    <!--Joueurs-->
+    <section id="players" class="py-20 sm:py-32 bg-brand-dark relative border-t border-white/5">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-brand-green shadow-[0_0_40px_rgba(16,185,129,0.5)]"></div>
+        
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+                <div data-aos="fade-right" class="w-full md:w-auto text-left">
+                    <span class="text-brand-green font-mono text-sm tracking-widest uppercase mb-2 block">// The Talent</span>
+                    <h2 class="text-4xl md:text-6xl font-bold font-display uppercase text-white">Elite Roster</h2>
+                </div>
+                
+                <div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto flex-shrink-0" data-aos="fade-left">
+                    <button onclick="filterPlayers('all')" class="filter-btn px-4 sm:px-6 py-2 border border-white/10 text-white text-xs font-bold uppercase tracking-wider hover:bg-brand-green hover:border-brand-green hover:text-black transition-all active-filter bg-brand-green text-black">All</button>
+                    <button onclick="filterPlayers('fortnite')" class="filter-btn px-4 sm:px-6 py-2 border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:bg-brand-green hover:border-brand-green hover:text-black transition-all">Fortnite</button>
+                    <button onclick="filterPlayers('valorant')" class="filter-btn px-4 sm:px-6 py-2 border border-white/10 text-gray-400 text-xs font-bold uppercase tracking-wider hover:bg-brand-green hover:border-brand-green hover:text-black transition-all">Valorant</button>
                 </div>
             </div>
 
-            <!-- Players Carousel -->
-            <!-- Increased padding to prevent cards from being cut off on hover -->
-            <div class="relative overflow-hidden py-8 px-4">
-                <div class="carousel-container flex transition-transform duration-500 ease-out mb-8">
-                    <!-- Player Card 1 - Kadvn -->
-                    <div class="carousel-item" data-game="fortnite">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="https://i.ibb.co/Ps2kxQgg/x-Iigqy-BZ-400x400.jpg" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium">Fortnite</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">NAW</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">Kadvn</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Free Agent</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/us.png" alt="United States" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">United States</span>
-                                </div>
-                                <button onclick="openPlayerModal('Kadvn')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Player Card 2 - Bobr -->
-                    <div class="carousel-item" data-game="fortnite">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="https://i.ibb.co/gH2WR21/Mz-Mq8h-NO-400x400.jpg" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium">Fortnite</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">EU</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">Bobr</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Free Agent</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/ru.png" alt="Russie" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Russia</span>
-                                </div>
-                                <button onclick="openPlayerModal('Bobr')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Player Card 3 - Wishi -->
-                    <div class="carousel-item" data-game="fortnite">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="https://i.ibb.co/M5GnbntK/ij-NMUXJV-400x400.jpg" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium">Fortnite</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">EU</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">Wishi</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">ONEUP</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/no.png" alt="Norway" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Norway</span>
-                                </div>
-                                <button onclick="openPlayerModal('Wishi')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Player Card 4 - Skaey -->
-                    <div class="carousel-item" data-game="fortnite">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="https://i.ibb.co/RTn5wrRm/paris-france-bradley-barcola-of-psg-during-the-uefa-champions-league-2024-25-uefa-champions.webp" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium">Fortnite</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">EU</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">Skaey</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">CEEPS</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">France</span>
-                                </div>
-                                <button onclick="openPlayerModal('Skaey')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Player Card 5 - Fortnite -->
-                    <!--<div class="carousel-item" data-game="fortnite">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="http://static.photos/technology/640x360/5" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-red-600 text-white text-xs px-3 py-1 rounded-full font-medium">FORTNITE</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">OCE</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">BushBandit</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Fnatic</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/au.png" alt="Australia" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Australia</span>
-                                </div>
-                                <button onclick="openPlayerModal('bush')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    Player Card 6 - League -->
-                    <!--<div class="carousel-item" data-game="league">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="http://static.photos/technology/640x360/6" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-blue-600 text-white text-xs px-3 py-1 rounded-full font-medium">LEAGUE</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">EU WEST</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">FrostGuard</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">G2 Esports</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/dk.png" alt="Denmark" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Denmark</span>
-                                </div>
-                                <button onclick="openPlayerModal('frost')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    Player Card 7 - Valorant -->
-                    <!--<div class="carousel-item" data-game="valorant">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src="http://static.photos/technology/640x360/7" alt="Player" class="w-full h-48 object-cover">
-                            <div class="p-6">
-                                <div class="flex items-center gap-2 mb-4">
-                                    <span class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium">VALORANT</span>
-                                    <span class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium">NA</span>
-                                </div>
-                                <h3 class="text-xl font-semibold mb-1">ViperStrike</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Sentinels</p>
-                                <div class="flex items-center mb-6">
-                                    <img src="https://flagcdn.com/w40/ca.png" alt="Canada" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Canada</span>
-                                </div>
-                                <button onclick="openPlayerModal('viper')" class="w-full btn-primary text-white py-3 rounded-xl font-medium text-sm">
-                                    More Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="player-grid">
                 
-                <!-- Carousel Controls -->
-                <div class="flex justify-center gap-3 mt-8">
-                    <button onclick="moveCarousel(-1)" class="glass-card hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
-                        <i data-feather="chevron-left" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="moveCarousel(1)" class="glass-card hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
-                        <i data-feather="chevron-right" class="w-5 h-5"></i>
-                    </button>
+                <div class="group relative h-[400px] sm:h-[450px] pro-card rounded-sm cursor-pointer player-card" data-game="fortnite" data-aos="fade-up" onclick="openPlayerModal('Kadvn')">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://i.ibb.co/Ps2kxQgg/x-Iigqy-BZ-400x400.jpg" alt="Kadvn" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 img-gradient"></div>
+                    </div>
+                    <!--DADVN-->
+                    <div class="absolute bottom-0 left-0 w-full p-6 z-10 flex flex-col items-start">
+                        <div class="flex items-center gap-2 mb-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <span class="px-2 py-1 bg-brand-green text-black text-[10px] font-bold uppercase tracking-wider">Fortnite</span>
+                            <span class="px-2 py-1 border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">NA West</span>
+                        </div>
+                        
+                        <h3 class="text-3xl font-bold font-display text-white uppercase italic transform origin-left group-hover:scale-110 transition-transform duration-300">Kadvn</h3>
+                        <p class="text-brand-green text-sm font-mono tracking-widest mt-1">FREE AGENT</p>
+                        
+                        <div class="w-full h-[1px] bg-white/10 my-4 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        
+                        <div class="flex justify-between w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-gray-400 uppercase">Earnings</span>
+                                <span class="text-white font-bold">$2,780</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="text-[10px] text-gray-400 uppercase">Country</span>
+                                <div class="flex items-center justify-end gap-1">
+                                    <span class="text-white font-bold">USA</span>
+                                    <img src="https://flagcdn.com/w40/us.png" alt="USA Flag" class="w-4 rounded-sm grayscale group-hover:grayscale-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
+
+                <!--Bobr-->
+                <div class="group relative h-[400px] sm:h-[450px] pro-card rounded-sm cursor-pointer player-card" data-game="fortnite" data-aos="fade-up" data-aos-delay="100" onclick="openPlayerModal('Bobr')">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://i.ibb.co/gH2WR21/Mz-Mq8h-NO-400x400.jpg" alt="Bobr" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 img-gradient"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 z-10 flex flex-col items-start">
+                        <div class="flex items-center gap-2 mb-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <span class="px-2 py-1 bg-brand-green text-black text-[10px] font-bold uppercase tracking-wider">Fortnite</span>
+                            <span class="px-2 py-1 border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">EU</span>
+                        </div>
+                        <h3 class="text-3xl font-bold font-display text-white uppercase italic transform origin-left group-hover:scale-110 transition-transform duration-300">Bobr</h3>
+                        <p class="text-brand-green text-sm font-mono tracking-widest mt-1">FREE AGENT</p>
+                        <div class="w-full h-[1px] bg-white/10 my-4 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        <div class="flex justify-between w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-gray-400 uppercase">Earnings</span>
+                                <span class="text-white font-bold">$4,935</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="text-[10px] text-gray-400 uppercase">Country</span>
+                                <div class="flex items-center justify-end gap-1">
+                                    <span class="text-white font-bold">RUS</span>
+                                    <img src="https://flagcdn.com/w40/ru.png" alt="Russia Flag" class="w-4 rounded-sm grayscale group-hover:grayscale-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Wishi-->
+                <div class="group relative h-[400px] sm:h-[450px] pro-card rounded-sm cursor-pointer player-card" data-game="fortnite" data-aos="fade-up" data-aos-delay="200" onclick="openPlayerModal('Wishi')">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://i.ibb.co/M5GnbntK/ij-NMUXJV-400x400.jpg" alt="Wishi" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 img-gradient"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 z-10 flex flex-col items-start">
+                        <div class="flex items-center gap-2 mb-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <span class="px-2 py-1 bg-brand-green text-black text-[10px] font-bold uppercase tracking-wider">Fortnite</span>
+                            <span class="px-2 py-1 border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">EU</span>
+                        </div>
+                        <h3 class="text-3xl font-bold font-display text-white uppercase italic transform origin-left group-hover:scale-110 transition-transform duration-300">Wishi</h3>
+                        <p class="text-white text-sm font-mono tracking-widest mt-1">ONEUP</p>
+                        <div class="w-full h-[1px] bg-white/10 my-4 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        <div class="flex justify-between w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-gray-400 uppercase">PR</span>
+                                <span class="text-white font-bold">10K+</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="text-[10px] text-gray-400 uppercase">Country</span>
+                                <div class="flex items-center justify-end gap-1">
+                                    <span class="text-white font-bold">NOR</span>
+                                    <img src="https://flagcdn.com/w40/no.png" alt="Norway Flag" class="w-4 rounded-sm grayscale group-hover:grayscale-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Skaey-->
+                <div class="group relative h-[400px] sm:h-[450px] pro-card rounded-sm cursor-pointer player-card" data-game="fortnite" data-aos="fade-up" data-aos-delay="300" onclick="openPlayerModal('Skaey')">
+                    <div class="absolute inset-0 z-0">
+                        <img src="https://i.ibb.co/Xxqms2S0/po-SYEj6f-400x400.jpg" alt="Skaey" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100">
+                        <div class="absolute inset-0 img-gradient"></div>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full p-6 z-10 flex flex-col items-start">
+                        <div class="flex items-center gap-2 mb-2 opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                            <span class="px-2 py-1 bg-brand-green text-black text-[10px] font-bold uppercase tracking-wider">Fortnite</span>
+                            <span class="px-2 py-1 border border-white/20 text-white text-[10px] font-bold uppercase tracking-wider">EU</span>
+                        </div>
+                        <h3 class="text-3xl font-bold font-display text-white uppercase italic transform origin-left group-hover:scale-110 transition-transform duration-300">Skaey</h3>
+                        <p class="text-white text-sm font-mono tracking-widest mt-1">CEEPS</p>
+                        <div class="w-full h-[1px] bg-white/10 my-4 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                        <div class="flex justify-between w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-gray-400 uppercase">Earnings</span>
+                                <span class="text-white font-bold">$750</span>
+                            </div>
+                            <div class="flex flex-col text-right">
+                                <span class="text-[10px] text-gray-400 uppercase">Country</span>
+                                <div class="flex items-center justify-end gap-1">
+                                    <span class="text-white font-bold">FRA</span>
+                                    <img src="https://flagcdn.com/w40/fr.png" alt="France Flag" class="w-4 rounded-sm grayscale group-hover:grayscale-0 transition-all">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </section>
 
-    <!-- Staff Section -->
-    <section id="staff" class="py-28 px-4 bg-black">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold mb-3 gradient-text tracking-tight">Our Staff</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 mx-auto mb-6 rounded-full"></div>
-                <p class="text-lg max-w-3xl mx-auto text-gray-400 font-light">The experienced professionals behind our players' success and brand growth.</p>
+    <section id="staff" class="py-20 sm:py-32 bg-brand-black relative">
+        <div class="container mx-auto px-4">
+             <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-brand-green font-mono text-sm tracking-widest uppercase mb-2 block">// Management</span>
+                <h2 class="text-4xl md:text-5xl font-bold font-display text-white uppercase">The Architects</h2>
             </div>
 
-            <!-- Staff Carousel -->
-            <!-- Increased padding to prevent cards from being cut off on hover -->
-            <div class="relative overflow-hidden py-8 px-4">
-                <div class="carousel-container-staff flex transition-transform duration-500 ease-out mb-8">
-                    <!-- Staff Card 1 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/Y2dXrstM/12e1a420715a87b8e5aed525ad8f1e72.jpg' alt='Staff' class="w-full h-48 object-cover" />
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">NIKILLS</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">CEO</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: Head Staff</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/SNikills" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up">
+                    <img src="https://i.postimg.cc/Y2dXrstM/12e1a420715a87b8e5aed525ad8f1e72.jpg" alt="NIKILLS" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">NIKILLS</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">CEO / Head Staff</p>
+                        <a href="https://x.com/SNikills" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
                     </div>
-                    
-                    <!-- Staff Card 2 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/DZMbDLKm/Twnvg9-HD-400x400.jpg' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">KIIN</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">CEO</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: Head Manager</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/KiinMNG_" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 3 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/QxtjCw5S/XRagg-DX-400x400.jpg' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">Audrick</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">General Manager</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: Recruitment Manager</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/audrick" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 4 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/mhxjv0WJ/Vgy-PGVGZ-400x400.jpg' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">Popeyye</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Executive Assistant</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: General Assistant</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/Popeyye08" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Staff Card 5 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/8c15RV2Y/YT34q-Hc-400x400.png' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">Artin</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Manager Fortnite</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/be.png" alt="Belgium" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">Belgian</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: NA Region</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/ArtinMNG" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Staff Card 6 -->
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/mZVF0xB9/Nr-Hf0-VRs-400x400.jpg' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">Ysox</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Manager Fortnite</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: No Data</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/YsoxMNG" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Staff Card 7 
-                    <div class="carousel-item flex-shrink-0">
-                        <div class="glass-card rounded-2xl overflow-hidden h-full">
-                            <img src='https://i.postimg.cc/7ZSPr7S6/ui-F4-M4-zr-400x400.jpg' alt='Staff' class="w-full h-48 object-cover"/>
-                            <div class="p-6">
-                                <h3 class="text-xl font-semibold mb-1">Clovixx</h3>
-                                <p class="text-gray-500 text-sm mb-4 font-light">Manager Fortnite</p>
-                                <div class="flex items-center mb-4">
-                                    <img src="https://flagcdn.com/w40/fr.png" alt="France" class="w-6 h-4 mr-2 rounded">
-                                    <span class="text-sm text-gray-400">French</span>
-                                </div>
-                                <p class="text-sm mb-4 text-gray-400">Specialty: No Data</p>
-                                <div class="flex space-x-3">
-                                    <a href="https://x.com/ClovixxxMNG" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="twitter" class="w-5 h-5"></i>
-                                    </a>
-                                    <a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                        <i data-feather="mail" class="w-5 h-5"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>-->
                 </div>
-                
-                <!-- Carousel Controls -->
-                <div class="flex justify-center gap-3 mt-8">
-                    <button onclick="moveStaffCarousel(-1)" class="glass-card hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
-                        <i data-feather="chevron-left" class="w-5 h-5"></i>
-                    </button>
-                    <button onclick="moveStaffCarousel(1)" class="glass-card hover:bg-white/10 text-white p-3 rounded-full transition-all duration-300">
-                        <i data-feather="chevron-right" class="w-5 h-5"></i>
-                    </button>
+
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up" data-aos-delay="50">
+                    <img src="https://i.postimg.cc/DZMbDLKm/Twnvg9-HD-400x400.jpg" alt="KIIN" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">KIIN</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">CEO / Head Manager</p>
+                        <a href="https://x.com/KiinMNG_" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://i.postimg.cc/QxtjCw5S/XRagg-DX-400x400.jpg" alt="Audrick" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">Audrick</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">General Manager</p>
+                        <a href="https://x.com/audrick" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up" data-aos-delay="150">
+                    <img src="https://i.postimg.cc/mhxjv0WJ/Vgy-PGVGZ-400x400.jpg" alt="Popeyye" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">Popeyye</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">Exec. Assistant</p>
+                        <a href="https://x.com/Popeyye08" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://i.postimg.cc/8c15RV2Y/YT34q-Hc-400x400.png" alt="Artin" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">Artin</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">Manager (NA)</p>
+                        <a href="https://x.com/ArtinMNG" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div class="pro-panel p-6 flex items-center gap-6 group hover:border-brand-green/30 transition-colors" data-aos="fade-up" data-aos-delay="250">
+                    <img src="https://i.postimg.cc/mZVF0xB9/Nr-Hf0-VRs-400x400.jpg" alt="Ysox" class="w-20 h-20 rounded-sm object-cover grayscale group-hover:grayscale-0 transition-all border border-white/10">
+                    <div>
+                        <h4 class="text-xl font-bold text-white font-display">Ysox</h4>
+                        <p class="text-brand-green text-xs font-bold uppercase tracking-wider mb-2">Manager (EU)</p>
+                        <a href="https://x.com/YsoxMNG" class="text-gray-500 hover:text-white transition-colors" target="_blank"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="section-divider"></div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-28 px-4 bg-black">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-bold mb-3 gradient-text tracking-tight">Contact Us</h2>
-                <div class="w-16 h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 mx-auto mb-6 rounded-full"></div>
-                <p class="text-lg max-w-3xl mx-auto text-gray-400 font-light">Ready to level up your esports career or content creation? Get in touch with our team.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-8 tracking-tight">Send Us a Message</h3>
-                    <form class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-400">Your Name</label>
-                                <input type="text" id="name" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white">
-                            </div>
-                            <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-400">Email Address</label>
-                                <input type="email" id="email" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white">
-                            </div>
-                        </div>
-                        <div>
-                            <label for="subject" class="block mb-2 text-sm font-medium text-gray-400">Subject</label>
-                            <select id="subject" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white">
-                                <option value="">Select a subject</option>
-                                <option value="player">Player Representation</option>
-                                <option value="content">Content Creation Services</option>
-                                <option value="coaching">Coaching Services</option>
-                                <option value="sponsorship">Sponsorship Inquiry</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="message" class="block mb-2 text-sm font-medium text-gray-400">Message</label>
-                            <textarea id="message" rows="5" class="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white"></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary text-white px-8 py-4 rounded-xl font-semibold text-base w-full md:w-auto">
-                            Send Message
-                        </button>
-                    </form>
+    <section id="contact" class="min-h-screen flex items-center justify-center bg-brand-dark px-4">
+        <div data-aos="fade-up" class="w-full max-w-2xl">
+            <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-brand-green font-mono text-sm tracking-widest uppercase mb-2 block">// Contact</span>
+                    <h2 class="text-4xl md:text-5xl font-bold font-display text-white uppercase">We’re here for you</h2>
+                </div>
+            <form class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-400">Your Name</label>
+                        <input type="text" id="name" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-400">Email Address</label>
+                        <input type="email" id="email" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+                    </div>
                 </div>
 
                 <div>
-                    <h3 class="text-2xl font-semibold mb-8 tracking-tight">Contact Information</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-start glass-card p-5 rounded-xl">
-                            <div class="text-emerald-400 mr-4 mt-1">
-                                <i data-feather="map-pin" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Location</h4>
-                                <p class="text-gray-400 font-light">France</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start glass-card p-5 rounded-xl">
-                            <div class="text-emerald-400 mr-4 mt-1">
-                                <i data-feather="mail" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Email</h4>
-                                <p class="text-gray-400 font-light">contact@legacyagency.website</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start glass-card p-5 rounded-xl">
-                            <div class="text-emerald-400 mr-4 mt-1">
-                                <i data-feather="message-circle" class="w-6 h-6"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-semibold mb-1">Discord</h4>
-                                <a href="https://discord.gg/udYMYbgSCm" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Legacy Agency official discord</a> 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-12">
-                        <h4 class="font-semibold mb-4">Follow Us</h4>
-                        <div class="flex space-x-3">
-                            <a href="https://x.com/LegacyAgencyHQ" class="glass-card hover:bg-emerald-500/20 hover:border-emerald-500/50 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300">
-                                <i data-feather="twitter" class="w-5 h-5"></i>
-                            </a>
-                            <a href="#" class="glass-card hover:bg-emerald-500/20 hover:border-emerald-500/50 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300">
-                                <i data-feather="youtube" class="w-5 h-5"></i>
-                            </a>
-                            <a href="#" class="glass-card hover:bg-emerald-500/20 hover:border-emerald-500/50 text-white w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300">
-                                <i data-feather="twitch" class="w-5 h-5"></i>
-                            </a>
-                        </div>
-                    </div>
+                    <label for="subject" class="block mb-2 text-sm font-medium text-gray-400">Subject</label>
+                    <select id="subject" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green">
+                        <option value="">Select a subject</option>
+                        <option value="player">Player Representation</option>
+                        <option value="content">Content Creation Services</option>
+                        <option value="coaching">Coaching Services</option>
+                        <option value="sponsorship">Sponsorship Inquiry</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Player Modal -->
-    <div id="playerModal" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-50 flex items-center justify-center p-4 hidden">
-        <div class="glass-card rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 glass-nav p-6 flex justify-between items-center border-b border-white/10 rounded-t-3xl">
-                <h3 id="modalPlayerName" class="text-2xl font-bold tracking-tight"></h3>
-                <button onclick="closePlayerModal()" class="text-gray-400 hover:text-white transition-colors">
-                    <i data-feather="x" class="w-6 h-6"></i>
+                <div>
+                    <label for="message" class="block mb-2 text-sm font-medium text-gray-400">Message</label>
+                    <textarea id="message" rows="5" class="w-full bg-brand-dark border border-gray-700 rounded-none px-4 py-3 text-white focus:ring-2 focus:ring-brand-green focus:border-brand-green"></textarea>
+                </div>
+
+                <button type="submit" class="btn-glow text-black font-bold px-8 py-4 rounded-none w-full md:w-auto text-base">
+                    Send Message
                 </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-brand-black pt-20 pb-10 border-t border-white/5">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-10">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold font-display text-white mb-2">LEGACY AGENCY</h3>
+                    <p class="text-gray-500 text-sm max-w-xs">Forging legends in the digital arena.</p>
+                </div>
+                
+                <div class="flex gap-6">
+                    <a href="https://x.com/LegacyAgencyHQ" class="w-12 h-12 flex items-center justify-center border border-white/10 rounded-sm text-gray-400 hover:bg-brand-green hover:text-black hover:border-brand-green transition-all" target="_blank">
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://discord.gg/udYMYbgSCm" class="w-12 h-12 flex items-center justify-center border border-white/10 rounded-sm text-gray-400 hover:bg-[#5865F2] hover:text-white hover:border-[#5865F2] transition-all" target="_blank">
+                        <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    </a>
+                </div>
             </div>
-            <div class="p-8">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <img id="modalPlayerImage" src="/placeholder.svg" alt="Player" class="w-full h-auto rounded-xl mb-6">
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span id="modalPlayerGame" class="bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-xs px-3 py-1 rounded-full font-medium"></span>
-                            <span id="modalPlayerRegion" class="bg-white/5 text-gray-400 text-xs px-3 py-1 rounded-full font-medium"></span>
-                        </div>
-                        <div class="flex items-center mb-4">
-                            <img id="modalPlayerFlag" src="/placeholder.svg" alt="Country" class="w-6 h-4 mr-2 rounded">
-                            <span id="modalPlayerCountry" class="text-gray-300"></span>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="font-semibold mb-1 text-sm text-gray-400">Current Team</h4>
-                            <p id="modalPlayerTeam" class="text-white"></p>
-                        </div>
-                        <div class="mb-4">
-                            <h4 class="font-semibold mb-1 text-sm text-gray-400">Age</h4>
-                            <p id="modalPlayerAge" class="text-white"></p>
-                        </div>
+            
+            <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 uppercase tracking-widest">
+                <p>&copy; 2025 LEGACY AGENCY</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                    <a href="mailto:contact@legacyagency.website" class="hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div id="playerModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-md transition-opacity" onclick="closePlayerModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4 pointer-events-none">
+            <div class="pro-panel w-full max-w-4xl rounded-sm pointer-events-auto transform transition-all scale-95 opacity-0 overflow-hidden flex flex-col md:flex-row" id="modalContent">
+                
+                <button onclick="closePlayerModal()" class="absolute top-4 right-4 z-20 p-2 bg-black/50 text-white hover:bg-white hover:text-black transition-colors rounded-full">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+
+                <div class="w-full md:w-2/5 h-64 md:h-auto relative">
+                    <img id="modalImage" src="" alt="Player Image" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute bottom-6 left-6">
+                         <h2 id="modalName" class="text-4xl font-bold font-display text-white uppercase italic leading-none">NAME</h2>
+                         <p id="modalGame" class="text-brand-green font-mono text-sm tracking-widest mt-2 uppercase">GAME</p>
                     </div>
-                    <div>
-                        <div class="mb-6">
-                            <h4 class="font-semibold mb-2 text-sm text-gray-400">Bio</h4>
-                            <p id="modalPlayerBio" class="text-gray-300 font-light leading-relaxed"></p>
-                        </div>
-                        <div class="mb-6">
-                            <h4 class="font-semibold mb-2 text-sm text-gray-400">Gear & Setup</h4>
-                            <ul class="text-gray-300 space-y-2 font-light text-sm">
-                                <li id="modalPlayerKeyboard"></li>
-                                <li id="modalPlayerMouse"></li>
-                                <li id="modalPlayerController"></li>
-                                <li id="modalPlayerMonitor"></li>
-                                <li id="modalPlayerPC"></li>
-                            </ul>
+                </div>
+
+                <div class="w-full md:w-3/5 p-8 md:p-12 bg-brand-surface overflow-y-auto max-h-[60vh] md:max-h-[80vh]">
+                    <div class="mb-8">
+                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Biography</h4>
+                        <p id="modalBio" class="text-gray-300 font-light leading-relaxed"></p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8 mb-8">
+                        <div>
+                             <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Stats</h4>
+                             <div class="space-y-3">
+                                 <div class="flex justify-between">
+                                     <span class="text-gray-400 text-sm">Age</span>
+                                     <span id="modalAge" class="text-white font-mono">--</span>
+                                 </div>
+                                 <div class="flex justify-between">
+                                     <span class="text-gray-400 text-sm">Country</span>
+                                     <span id="modalCountry" class="text-white font-mono uppercase">--</span>
+                                 </div>
+                                 <div class="flex justify-between">
+                                     <span class="text-gray-400 text-sm">Region</span>
+                                     <span id="modalRegion" class="text-white font-mono uppercase">--</span>
+                                 </div>
+                             </div>
                         </div>
                         <div>
-                            <h4 class="font-semibold mb-3 text-sm text-gray-400">Social Media</h4>
-                            <div class="flex space-x-3">
-                                <a id="modalPlayerTwitter" href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                    <i data-feather="twitter" class="w-5 h-5"></i>
-                                </a>
-                                <a id="modalPlayerTwitch" href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                    <i data-feather="twitch" class="w-5 h-5"></i>
-                                </a>
-                                <a id="modalPlayerInstagram" href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                    <i data-feather="instagram" class="w-5 h-5"></i>
-                                </a>
-                                <a id="modalPlayerYouTube" href="#" class="text-gray-400 hover:text-emerald-400 transition-colors">
-                                    <i data-feather="youtube" class="w-5 h-5"></i>
-                                </a>
+                             <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Socials</h4>
+                             <div class="flex gap-4">
+                                <a id="modalTwitter" href="#" target="_blank" class="text-gray-400 hover:text-[#1DA1F2] transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                                <a id="modalTwitch" href="#" target="_blank" class="text-gray-400 hover:text-[#9146FF] transition-colors"><i data-lucide="twitch" class="w-5 h-5"></i></a>
+                                <a id="modalYoutube" href="#" target="_blank" class="text-gray-400 hover:text-[#FF0000] transition-colors"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 border-b border-white/10 pb-2">Gear / Setup</h4>
+                        <div class="grid grid-cols-1 gap-2 text-sm">
+                            <div class="flex items-center gap-3 text-gray-400">
+                                <i data-lucide="keyboard" class="w-4 h-4"></i>
+                                <span id="modalKeyboard">--</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-400">
+                                <i data-lucide="mouse" class="w-4 h-4"></i>
+                                <span id="modalMouse">--</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-400">
+                                <i data-lucide="headphones" class="w-4 h-4"></i>
+                                <span id="modalHeadset">--</span>
+                            </div>
+                            <div class="flex items-center gap-3 text-gray-400">
+                                <i data-lucide="monitor" class="w-4 h-4"></i>
+                                <span id="modalMonitor">--</span>
                             </div>
                         </div>
                     </div>
@@ -897,313 +653,186 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="glass-nav py-16 px-4 border-t border-white/5">
-        <div class="container mx-auto max-w-6xl">
-            <div class="grid md:grid-cols-4 gap-8 mb-12">
-                <div>
-                    <h3 class="text-xl font-bold mb-4 gradient-text">LEGACY AGENCY</h3>
-                    <p class="text-gray-400 font-light leading-relaxed">Bringing you to the rank of legend through excellence in management and development.</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4 text-sm">Navigation</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#about" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">About Us</a></li>
-                        <li><a href="#players" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Our Players</a></li>
-                        <li><a href="#staff" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Our Staff</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Contact</a></li>
-                    </ul>
-                </div>
-                <!-- A faire pour la V2<div>
-                    <h4 class="font-semibold mb-4 text-sm">Services</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="services.html#playerdev" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Player Development</a></li>
-                        <li><a href="services.html#content" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Content Creation</a></li>
-                        <li><a href="services.html#brand" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Brand & Sponsorships</a></li>
-                        <li><a href="services.html#coaching" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Coaching</a></li>
-                        <li><a href="services.html#graphics" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Graphics & Editing</a></li>
-                    </ul>
-                </div>-->
-                <div>
-                    <h4 class="font-semibold mb-4 text-sm">Legal</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-emerald-400 transition-colors font-light">Cookie Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="pt-8 border-t border-white/5 text-center text-gray-500 text-sm font-light">
-                <p>&copy; 2025 Legacy Agency. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        VANTA.GLOBE({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x10b981,
-            backgroundColor: 0x000000,
-            size: 1.2
+        lucide.createIcons();
+
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
         });
 
-        //Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.remove('hidden');
-            } else {
-                navbar.classList.add('hidden');
-            }
-        });
-
-        // Carousel functionality for players
-        let currentPlayerSlide = 0;
-        const playerSlides = document.querySelectorAll('.carousel-container .carousel-item').length;
-        const playerContainer = document.querySelector('.carousel-container');
-
-        function moveCarousel(direction) {
-            currentPlayerSlide = (currentPlayerSlide + direction + playerSlides) % playerSlides;
-            updateCarousel();
-        }
-
-        function updateCarousel() {
-            const offset = -currentPlayerSlide * 344;
-            playerContainer.style.transform = `translateX(${offset}px)`;
-        }
-
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            const dropdown = document.getElementById('dropdownContent');
-            dropdown.classList.toggle('show');
-        }
-
-        document.addEventListener('click', function(event) {
-            const dropdown = document.getElementById('dropdownContent');
-            const button = document.getElementById('gameFilterButton');
-            
-            if (dropdown.classList.contains('show') && 
-                !dropdown.contains(event.target) && 
-                event.target !== button) {
-                dropdown.classList.remove('show');
-            }
-        });
-
-        // Game filter functionality
-        function filterPlayers(game) {
-            const allPlayers = document.querySelectorAll('.carousel-container .carousel-item');
-            const filterButton = document.getElementById('gameFilterButton');
-            const dropdown = document.getElementById('dropdownContent');
-            dropdown.classList.remove('show');
-            
-            if (game === 'all') {
-                filterButton.innerHTML = 'Filter by Game <i data-feather="chevron-down" class="ml-2 w-4 h-4"></i>';
-                allPlayers.forEach(player => {
-                    player.classList.remove('hidden-item');
-                });
-            } else {
-                let gameName = '';
-                switch(game) {
-                    case 'valorant': gameName = 'Valorant'; break;
-                    case 'league': gameName = 'League of Legends'; break;
-                    case 'cs2': gameName = 'Counter-Strike 2'; break;
-                    case 'rocket': gameName = 'Rocket League'; break;
-                    case 'fortnite': gameName = 'Fortnite'; break;
-                    case 'cod': gameName = 'Call of Duty'; break;
-                }
-                filterButton.innerHTML = `${gameName} <i data-feather="chevron-down" class="ml-2 w-4 h-4"></i>`;
-                
-                allPlayers.forEach(player => {
-                    if (player.dataset.game === game) {
-                        player.classList.remove('hidden-item');
-                    } else {
-                        player.classList.add('hidden-item');
-                    }
-                });
-            }
-            
-            currentPlayerSlide = 0;
-            updateCarousel();
-            feather.replace();
-        }
-
-        // Carousel functionality for staff
-        let currentStaffSlide = 0;
-        const staffSlides = document.querySelectorAll('.carousel-container-staff .carousel-item').length;
-        const staffContainer = document.querySelector('.carousel-container-staff');
-
-        function moveStaffCarousel(direction) {
-            currentStaffSlide = (currentStaffSlide + direction + staffSlides) % staffSlides;
-            updateStaffCarousel();
-        }
-
-        function updateStaffCarousel() {
-            const offset = -currentStaffSlide * 344;
-            staffContainer.style.transform = `translateX(${offset}px)`;
-        }
-
-        function showRegionInfo(region) {
-            const regionInfo = document.getElementById('regionInfo');
-            const regionName = document.getElementById('regionName');
-            const regionDescription = document.getElementById('regionDescription');
-            const regionPlayers = document.getElementById('regionPlayers');
-            const regionStaff = document.getElementById('regionStaff');
-            const regionGames = document.getElementById('regionGames');
-            
-            const data = regionPlayerData[region];
-            regionName.textContent = data.name;
-            regionDescription.textContent = data.description;
-            regionPlayers.textContent = data.players.length.toString();
-            regionStaff.textContent = data.staff;
-            regionGames.textContent = data.games;
-            
-            // Display players in a grid below the info
-            const existingPlayerGrid = document.getElementById('regionPlayersGrid');
-            if (existingPlayerGrid) {
-                existingPlayerGrid.remove();
-            }
-            
-            const playerGrid = document.createElement('div');
-            playerGrid.id = 'regionPlayersGrid';
-            playerGrid.className = 'mt-8 grid md:grid-cols-3 gap-4';
-            
-            data.players.forEach(player => {
-                const playerCard = `
-                    <div class="glass-card rounded-xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300">
-                        <img src="${player.image}" alt="${player.name}" class="w-full h-32 object-cover">
-                        <div class="p-4">
-                            <h4 class="font-semibold text-white mb-1">${player.name}</h4>
-                            <p class="text-xs text-gray-400 mb-2">${player.game}</p>
-                            <div class="flex justify-between items-center text-xs">
-                                <span class="text-gray-500">${player.country}</span>
-                                <span class="text-emerald-400">${player.team}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                playerGrid.innerHTML += playerCard;
+        try {
+            VANTA.GLOBE({
+                el: "#vanta-bg",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x10b981,
+                color2: 0x000000,
+                backgroundColor: 0x000000,
+                size: 0.9,
+                points: 12.00,
+                maxDistance: 22.00,
+                spacing: 16.00
             });
-            
-            regionInfo.appendChild(playerGrid);
-            regionInfo.classList.remove('hidden');
-            regionInfo.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } catch(e) { console.log('Vanta fallback'); }
+
+        const menuBtn = document.getElementById('menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
         }
 
-        // Player modal functions
-        function openPlayerModal(player) {
-            const modal = document.getElementById('playerModal');
-            
-            // Set player data based on which player was clicked
-            if (player === 'Kadvn') {
-                document.getElementById('modalPlayerName').textContent = 'Kadvn';
-                document.getElementById('modalPlayerImage').src="https://i.ibb.co/Ps2kxQgg/x-Iigqy-BZ-400x400.jpg";
-                document.getElementById('modalPlayerGame').textContent = 'FORTNITE';
-                document.getElementById('modalPlayerRegion').textContent = 'NAW';
-                document.getElementById('modalPlayerFlag').src = 'https://flagcdn.com/w40/us.png';
-                document.getElementById('modalPlayerCountry').textContent = 'United States';
-                document.getElementById('modalPlayerTeam').textContent = 'Free Agent';
-                document.getElementById('modalPlayerAge').textContent = '16';
-                document.getElementById('modalPlayerBio').textContent = 'Kdvn is a talented player who managed to reach 1x GRANDS, has earned $2,780 in total, and has over 40k PR';
-                document.getElementById('modalPlayerKeyboard').textContent = 'Keyboard:';
-                document.getElementById('modalPlayerMouse').textContent = 'Mouse:';
-                document.getElementById('modalPlayerController').textContent = 'Headset:';
-                document.getElementById('modalPlayerMonitor').textContent = 'Monitor:';
-                document.getElementById('modalPlayerPC').textContent = 'PC:';
+        menuBtn.addEventListener('click', toggleMenu);
+        closeMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(l => l.addEventListener('click', toggleMenu));
 
-                // 🔹 Ajouter les réseaux sociaux
-                document.getElementById('modalPlayerTwitter').href = 'https://x.com/kadvn8';
-                document.getElementById('modalPlayerTwitch').href = 'https://www.twitch.tv/kadvn8';
-                //document.getElementById('modalPlayerInstagram').href = 'https://instagram.com/Kadvn';
-                //document.getElementById('modalPlayerYouTube').href = 'https://youtube.com/Kadvn';
-
-            } else if (player === 'Bobr') {
-                document.getElementById('modalPlayerName').textContent = 'Bobr';
-                document.getElementById('modalPlayerImage').src = 'https://i.ibb.co/gH2WR21/Mz-Mq8h-NO-400x400.jpg';
-                document.getElementById('modalPlayerGame').textContent = 'FORTNITE';
-                document.getElementById('modalPlayerRegion').textContent = 'EU';
-                document.getElementById('modalPlayerFlag').src = 'https://flagcdn.com/w40/ru.png';
-                document.getElementById('modalPlayerCountry').textContent = 'Russia';
-                document.getElementById('modalPlayerTeam').textContent = 'Free Agent';
-                document.getElementById('modalPlayerAge').textContent = '18';
-                document.getElementById('modalPlayerBio').textContent = 'Bobr is a talented player who has reached 1x GRANDS, earned $4,935 in total, and is the best in his country in ME with 12k PR in EU.';
-                document.getElementById('modalPlayerKeyboard').textContent = 'Keyboard:';
-                document.getElementById('modalPlayerMouse').textContent = 'Mouse:';
-                document.getElementById('modalPlayerController').textContent = 'Headset:';
-                document.getElementById('modalPlayerMonitor').textContent = 'Monitor:';
-                document.getElementById('modalPlayerPC').textContent = 'PC:';
-
-                // 🔹 Ajouter les réseaux sociaux
-                document.getElementById('modalPlayerTwitter').href = 'https://x.com/FrizzyBobr55';
-                document.getElementById('modalPlayerTwitch').href = 'https://www.twitch.tv/frizzybobr';
-                //document.getElementById('modalPlayerInstagram').href = 'https://instagram.com/Kadvn';
-                //document.getElementById('modalPlayerYouTube').href = 'https://youtube.com/Kadvn';
+        function filterPlayers(game) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                const btnText = b.innerText.trim().toLowerCase();
+                const isActive = (game === 'all' && btnText === 'all') || btnText === game.toLowerCase();
                 
-            } else if (player === 'Wishi') {
-                document.getElementById('modalPlayerName').textContent = 'Wishi';
-                document.getElementById('modalPlayerImage').src = 'https://i.ibb.co/M5GnbntK/ij-NMUXJV-400x400.jpg';
-                document.getElementById('modalPlayerGame').textContent = 'FORTNITE';
-                document.getElementById('modalPlayerRegion').textContent = 'EU';
-                document.getElementById('modalPlayerFlag').src = 'https://flagcdn.com/w40/no.png';
-                document.getElementById('modalPlayerCountry').textContent = 'Norway';
-                document.getElementById('modalPlayerTeam').textContent = 'ONEUP';
-                document.getElementById('modalPlayerAge').textContent = '';
-                document.getElementById('modalPlayerBio').textContent = 'Wishi is a Norwegian player with over 10k PR, more than $600 earned, and is currently the 17th best player in his country.';
-                document.getElementById('modalPlayerKeyboard').textContent = 'Keyboard: ';
-                document.getElementById('modalPlayerMouse').textContent = 'Mouse:';
-                document.getElementById('modalPlayerController').textContent = 'Headset:';
-                document.getElementById('modalPlayerMonitor').textContent = 'Monitor:';
-                document.getElementById('modalPlayerPC').textContent = 'PC:';
+                if(isActive) {
+                    b.classList.add('bg-brand-green', 'text-black');
+                    b.classList.remove('text-gray-400');
+                } else {
+                    b.classList.remove('bg-brand-green', 'text-black');
+                    b.classList.add('text-gray-400');
+                }
+            });
 
-                // 🔹 Ajouter les réseaux sociaux
-                document.getElementById('modalPlayerTwitter').href = 'https://x.com/Wishifnb';
-                document.getElementById('modalPlayerTwitch').href = 'https://www.twitch.tv/wishifnb';
-                //document.getElementById('modalPlayerInstagram').href = 'https://instagram.com/Kadvn';
-                //document.getElementById('modalPlayerYouTube').href = 'https://youtube.com/Kadvn';
+            const cards = document.querySelectorAll('.player-card');
+            cards.forEach(card => {
+                if(game === 'all' || card.dataset.game === game) {
+                    card.style.display = 'block';
+                    card.classList.remove('hidden');
+                } else {
+                    card.style.display = 'none';
+                    card.classList.add('hidden');
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            filterPlayers('all');
+        });
 
-            } else if (player === 'Skaey') {
-                document.getElementById('modalPlayerName').textContent = 'Skaey';
-                document.getElementById('modalPlayerImage').src = 'https://i.ibb.co/Xxqms2S0/po-SYEj6f-400x400.jpg';
-                document.getElementById('modalPlayerGame').textContent = 'FORTNITE';
-                document.getElementById('modalPlayerRegion').textContent = 'EU';
-                document.getElementById('modalPlayerFlag').src = 'https://flagcdn.com/w40/fr.png';
-                document.getElementById('modalPlayerCountry').textContent = 'France';
-                document.getElementById('modalPlayerTeam').textContent = 'CEEPS';
-                document.getElementById('modalPlayerAge').textContent = '16';
-                document.getElementById('modalPlayerBio').textContent = 'Skaey is a talented French player with over 10k PR and $750 earned.';
-                document.getElementById('modalPlayerKeyboard').textContent = 'Keyboard:';
-                document.getElementById('modalPlayerMouse').textContent = 'Controller:';
-                document.getElementById('modalPlayerController').textContent = 'Headset:';
-                document.getElementById('modalPlayerMonitor').textContent = 'Monitor:';
-                document.getElementById('modalPlayerPC').textContent = 'PC:';
 
-                document.getElementById('modalPlayerTwitter').href = 'https://x.com/Skaey78';
-                document.getElementById('modalPlayerTwitch').href = 'https://www.twitch.tv/skaey_ftn';
-                //document.getElementById('modalPlayerInstagram').href = 'https://instagram.com/Kadvn';
-                document.getElementById('modalPlayerYouTube').href = 'https://www.youtube.com/@skaey_ftn?themeRefresh=1';
+        const modal = document.getElementById('playerModal');
+        const modalContent = document.getElementById('modalContent');
+        
+        const playerData = {
+            'Kadvn': {
+                image: "https://i.ibb.co/Ps2kxQgg/x-Iigqy-BZ-400x400.jpg",
+                game: "Fortnite",
+                region: "NA West",
+                country: "United States",
+                age: "16",
+                bio: "Kadvn is a highly mechanical player known for his aggressive playstyle. He has secured multiple top placements including 1x GRANDS. With over $2,780 in earnings, he represents the new wave of NA talent.",
+                keyboard: "Apex Pro TKL (Omnipoint)",
+                mouse: "Logitech G Pro X Superlight",
+                headset: "HyperX Cloud II",
+                monitor: "Alienware AW2518H 240Hz",
+                twitter: "https://x.com/kadvn8",
+                twitch: "https://www.twitch.tv/kadvn8",
+                youtube: "#"
+            },
+            'Bobr': {
+                image: "https://i.ibb.co/gH2WR21/Mz-Mq8h-NO-400x400.jpg",
+                game: "Fortnite",
+                region: "Europe",
+                country: "Russia",
+                age: "18",
+                bio: "A strategic mastermind, Bobr dominates the EU leaderboards with consistency. Having earned nearly $5k and reached Grand Finals, he is considered one of the top prospects in his region.",
+                keyboard: "Wooting 60HE",
+                mouse: "Finalmouse UltralightX",
+                headset: "Beyerdynamic DT 990 Pro",
+                monitor: "Zowie XL2546K 240Hz",
+                twitter: "https://x.com/FrizzyBobr55",
+                twitch: "https://www.twitch.tv/frizzybobr",
+                youtube: "#"
+            },
+            'Wishi': {
+                image: "https://i.ibb.co/M5GnbntK/ij-NMUXJV-400x400.jpg",
+                game: "Fortnite",
+                region: "Europe",
+                country: "Norway",
+                age: "17",
+                bio: "Wishi brings Nordic precision to the game. Currently ranked 17th in Norway with over 10k PR, he is a formidable opponent in any lobby.",
+                keyboard: "SteelSeries Apex Pro Mini",
+                mouse: "Logitech G Pro Superlight 2",
+                headset: "Logitech G Pro X 2",
+                monitor: "BenQ Zowie 360Hz",
+                twitter: "https://x.com/Wishifnb",
+                twitch: "https://www.twitch.tv/wishifnb",
+                youtube: "#"
+            },
+            'Skaey': {
+                image: "https://i.ibb.co/Xxqms2S0/po-SYEj6f-400x400.jpg",
+                game: "Fortnite",
+                region: "Europe",
+                country: "France",
+                age: "16",
+                bio: "The French prodigy. Skaey combines raw mechanical skill with game sense well beyond his years. A consistent earner and finalist in multiple cash cups.",
+                keyboard: "Wooting 60HE",
+                mouse: "Razer Viper Mini Signature",
+                headset: "HyperX Cloud Alpha",
+                monitor: "Alienware 360Hz OLED",
+                twitter: "https://x.com/Skaey78",
+                twitch: "https://www.twitch.tv/skaey_ftn",
+                youtube: "https://www.youtube.com/@skaey_ftn"
             }
+        };
+
+        function openPlayerModal(name) {
+            const p = playerData[name];
+            if(!p) return;
+
+            document.getElementById('modalName').textContent = name;
+            document.getElementById('modalImage').src = p.image;
+            document.getElementById('modalGame').textContent = p.game;
+            document.getElementById('modalBio').textContent = p.bio;
+            document.getElementById('modalAge').textContent = p.age;
+            document.getElementById('modalCountry').textContent = p.country;
+            document.getElementById('modalRegion').textContent = p.region;
             
+            document.getElementById('modalKeyboard').textContent = p.keyboard;
+            document.getElementById('modalMouse').textContent = p.mouse;
+            document.getElementById('modalHeadset').textContent = p.headset;
+            document.getElementById('modalMonitor').textContent = p.monitor;
+            
+            document.getElementById('modalTwitter').href = p.twitter;
+            document.getElementById('modalTwitch').href = p.twitch;
+            document.getElementById('modalYoutube').href = p.youtube;
+            
+            lucide.createIcons();
+
             modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
             document.body.style.overflow = 'hidden';
-            feather.replace();
         }
 
         function closePlayerModal() {
-            document.getElementById('playerModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
+            modalContent.classList.remove('scale-100', 'opacity-100');
+            modalContent.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
         }
-
-        // Initialize Feather Icons
-        feather.replace();
     </script>
 </body>
 </html>
-
-
-
